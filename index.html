@@ -144,11 +144,11 @@
   }
 
   function updateAll() {
-    const eligibility = getNextDate(27);
-    const payment = getNextDate(1);
-    updateSection(eligibility, "eligibility");
-    updateSection(payment, "payment");
-  }
+  const eligibility = getNextDate(27);
+  const payment = getNextDate(1);
+  updateSection(eligibility, "eligibility");
+  updateSection(payment, "payment");
+}
 
   updateAll();
   setInterval(updateAll, 1000);
