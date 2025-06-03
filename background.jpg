@@ -1,4 +1,0 @@
-body {
-  background: url('https://i.imgur.com/GIoMsVp.jpeg') no-repeat center center fixed;
-  background-size: cover;
-}
