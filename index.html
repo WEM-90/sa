@@ -123,8 +123,8 @@
       target = new Date(year, month, day);
     }
     const wd = target.getDay();
-    if(wd === 5) target.setDate(target.getDate() + 3);
-    if(wd === 6) target.setDate(target.getDate() + 2);
+    if(wd === 5) target.setDate(target.getDate() + 0);
+    if(wd === 6) target.setDate(target.getDate() + 0);
     return target;
   }
 
