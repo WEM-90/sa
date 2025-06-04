@@ -146,8 +146,10 @@
   function updateAll() {
     const eligibility = getNextDate(27);
     const payment = getNextDate(1);
-    updateSection(eligibility, "eligibility");
-    updateSection(payment, "payment");
+    updateSection(eligibility, "eligibilityDate", "eligibilityDay", "eligibilityCountdown");
+    updateSection(payment, "paymentDate", "paymentDay", "paymentCountdown");
+  </script>
+
   }
 
   updateAll();
