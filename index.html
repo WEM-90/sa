@@ -109,34 +109,7 @@
 
   updateAll();
   setInterval(updateAll, 1000);  
-</script>
 
-<!-- كود الطرطيع الثقيل -->
-<script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.5.1/dist/confetti.browser.min.js"></script>
-<script>
-  const duration = 5 * 1000;
-  const end = Date.now() + duration;
-
-  (function frame() {
-    confetti({
-      particleCount: 7,
-      angle: 60,
-      spread: 90,
-      origin: { x: 0 },
-      colors: ['#bb0000', '#ffffff', '#ffcc00']
-    });
-    confetti({
-      particleCount: 7,
-      angle: 120,
-      spread: 90,
-      origin: { x: 1 },
-      colors: ['#bb0000', '#ffffff', '#ffcc00']
-    });
-
-    if (Date.now() < end) {
-      requestAnimationFrame(frame);
-    }
-  })();
 </script>  
   
 </body>
