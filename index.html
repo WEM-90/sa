@@ -106,7 +106,7 @@
     const dateStr = targetDate.getFullYear() + "-" + (targetDate.getMonth()+1).toString().padStart(2, '0') + "-" + targetDate.getDate().toString().padStart(2, '0');
     document.getElementById(prefix + "-date").textContent = dateStr;
     document.getElementById(prefix + "-day").textContent = weekdays[targetDate.getDay()];
-    document.getElementById(prefix + "-remaining").textContent = `${days} يوم`;
+    document.getElementById(prefix + "-remaining").textContent = `${days} يــوم`;
     document.getElementById(prefix + "-countdown").textContent = `${days}ي ${hours}س ${minutes}د ${seconds}ث`;
   }
 
