@@ -17,6 +17,7 @@
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       color: #fff;
+      position: relative;
     }
 
     .logo {
@@ -55,23 +56,35 @@
       color: white;
     }
 
-    .notice, .visitor-counter {
+    .notice {
       color: red;
       margin: 8px 0;
       font-size: 0.75rem;
     }
 
-    .footer {
-      text-align: center;
-      font-size: 0.7rem;
-      color: #aaa;
-      padding: 10px 0;
-      margin-top: 30px;
-      margin-bottom: 20px;
-      background: rgba(0, 0, 0, 0.3);
+    .visitor-counter {
+      color: red;
+      margin: 8px 0;
+      font-size: 0.75rem;
     }
 
-    a {
+    #visitor-count {
+      color: white;
+    }
+
+    .footer {
+      position: absolute;
+      top: 78%; /* عدّل النسبة إذا احتجت */
+      left: 50%;
+      transform: translateX(-50%);
+      text-align: center;
+      font-size: 0.7rem;
+      color: #eee;
+      background: none;
+      padding: 10px 0;
+    }
+
+    .footer a {
       color: #00bfff;
       text-decoration: none;
     }
@@ -113,7 +126,7 @@
 
   <div class="notice">اعلان الاهليات مالها ساعة محددة</div>
   <div class="notice">الضمان لا يصرف خلال عطلة نهاية الأسبوع</div>
-  <div class="visitor-counter">عدد الـــزائـرين: <span id="visitor-count">0</span></div>
+  <div class="visitor-counter">عدد الزائرين: <span id="visitor-count">0</span></div>
 
   <div class="footer">
     جميع الحقوق محفوظة © 2025 - 𝐄𝐦𝐨 ، 𝐖𝐞𝐦_𝟗𝟎 <br>
