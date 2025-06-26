@@ -59,7 +59,7 @@
     .notice {
       color: red;
       margin: 8px 0;
-      font-size: 0.75rem;
+      font-size: 0.8rem;
     }
 
     .visitor-counter {
@@ -124,12 +124,8 @@
     </tr>
   </table>
 
-  <div class="notice" style="font-size: 0.8rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    اعلان الاهليات مالها ساعة محددة
-  </div>
-  <div class="notice" style="font-size: 0.8rem; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;">
-    الضمان لا يصرف خلال عطلة نهاية الأسبوع
-  </div>
+  <div class="notice">اعلان الاهليات مالها ساعة محددة</div>
+  <div class="notice">الضمان لا يصرف خلال عطلة نهاية الأسبوع</div>
 
   <div class="visitor-counter">
     عـدد الزائريــن: <span id="visitor-count">0</span>
@@ -145,12 +141,19 @@
   </video>
 
   <script>
+    // تحويل الأرقام إلى Unicode مزخرف
+    function toFancyNumbers(number) {
+      const fancyDigits = ['𝟎','𝟏','𝟐','𝟑','𝟒','𝟓','𝟔','𝟕','𝟖','𝟗'];
+      return number.toString().split('').map(char => fancyDigits[char] || char).join('');
+    }
+
+    // جلب عدد الزوار
     fetch('https://sa-3fxj.onrender.com/increment', { method: 'POST' })
       .then(() => {
         fetch('https://sa-3fxj.onrender.com/get-count')
           .then(res => res.json())
           .then(data => {
-            document.getElementById('visitor-count').textContent = data.count;
+            document.getElementById('visitor-count').textContent = toFancyNumbers(data.count);
           });
       })
       .catch(() => {
@@ -198,7 +201,7 @@
     }
 
     updateAll();
-    setInterval(updateAll, 1000);  
+    setInterval(updateAll, 1000);
   </script>
 
 </body>
