@@ -5,18 +5,14 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>مواعيد صدور الأهلية ونزول الضمان المطور</title>
   <style>
-    html, body {
-      height: 100%;
-      margin: 0;
-      padding: 0;
-    }
-
     body {
       background: url('background.jpg') no-repeat center center fixed;
       background-size: cover;
       font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       text-align: center;
       color: #fff;
+      margin: 0;
+      padding: 0;
       position: relative;
     }
 
@@ -60,18 +56,20 @@
       color: red;
       margin: 8px 0;
       font-size: 0.8rem;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .visitor-counter {
       color: #eeeeee;
-      font-size: 0.8rem;
+      font-size: 0.75rem;
       margin: 8px 0;
     }
 
     #visitor-count {
+      font-size: 1.4rem; /* ← حجم الرقم هنا */
       color: white;
-      font-size: 1.2rem; /* كبرنا الرقم */
-      font-weight: bold;  /* وجعلناه أوضح */
+      font-weight: bold;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
     }
 
     .footer {
@@ -82,8 +80,6 @@
       text-align: center;
       font-size: 0.7rem;
       color: #ff9900;
-      background: none;
-      padding: 10px 0;
     }
 
     .footer a {
@@ -96,13 +92,14 @@
       .section-title { font-size: 0.8rem; }
       table { font-size: 0.65rem; }
       .notice, .visitor-counter, .footer { font-size: 0.65rem; }
-      #visitor-count { font-size: 1rem; }
+      #visitor-count { font-size: 1.2rem; }
     }
   </style>
 </head>
 <body>
 
   <img class="logo" src="logo.png" alt="الشعار">
+
   <h1>مواعيد صدور الأهلية ونزول الضمان المطور</h1>
 
   <div class="section-title">صدور اهليـــة الضمان المطور</div>
@@ -131,11 +128,11 @@
   <div class="notice">الضمان لا يصرف خلال عطلة نهاية الأسبوع</div>
 
   <div class="visitor-counter">
-    عدد الزائريـن: <span id="visitor-count">0</span>
+    عـدد الزائريــن: <span id="visitor-count">0</span>
   </div>
 
   <div class="footer">
-    <span>𝐄𝐦𝐨 ، 𝐖𝐞𝐦_𝟗𝟎</span><br>
+    <span>2025 - Emo , Wem_90</span><br>
     <a href="https://t.me/aldmmaan" target="_blank">قـروب الضمــان المطـور</a>
   </div>
 
@@ -144,18 +141,6 @@
   </video>
 
   <script>
-    fetch('https://sa-3fxj.onrender.com/increment', { method: 'POST' })
-      .then(() => {
-        fetch('https://sa-3fxj.onrender.com/get-count')
-          .then(res => res.json())
-          .then(data => {
-            document.getElementById('visitor-count').textContent = data.count;
-          });
-      })
-      .catch(() => {
-        document.getElementById('visitor-count').textContent = 'خطأ في الاتصال';
-      });
-
     const weekdays = ["الأحــد","الإثنيــن","الثلاثــاء","الأربعــاء","الخميــس","الجمعــة","السبــت"];
 
     function getNextDate(day) {
@@ -163,7 +148,11 @@
       let year = now.getFullYear();
       let month = now.getMonth();
       let target = new Date(year, month, day);
-      if (target <= now) { month += 1; if (month > 11) { year += 1; month = 0; } target = new Date(year, month, day); }
+      if (target <= now) {
+        month += 1;
+        if (month > 11) { year += 1; month = 0; }
+        target = new Date(year, month, day);
+      }
       return target;
     }
 
@@ -188,6 +177,14 @@
       document.getElementById(prefix + "-countdown").textContent = `${days}ي ${hours}س ${minutes}د ${seconds}ث`;
     }
 
+    function convertToDoubleStruck(num) {
+      const map = {
+        '0': '𝟎', '1': '𝟏', '2': '𝟐', '3': '𝟑', '4': '𝟒',
+        '5': '𝟓', '6': '𝟔', '7': '𝟕', '8': '𝟖', '9': '𝟗'
+      };
+      return num.toString().split('').map(d => map[d] || d).join('');
+    }
+
     function updateAll() {
       const eligibility = getNextDate(27);
       let payment = getNextDate(1);
@@ -196,9 +193,21 @@
       updateSection(payment, "payment");
     }
 
-    updateAll();
-    setInterval(updateAll, 1000);  
-  </script>
+    // عداد الزوار مع تحويل الأرقام
+    fetch('https://sa-3fxj.onrender.com/increment', { method: 'POST' })
+      .then(() => {
+        fetch('https://sa-3fxj.onrender.com/get-count')
+          .then(res => res.json())
+          .then(data => {
+            document.getElementById('visitor-count').textContent = convertToDoubleStruck(data.count);
+          });
+      })
+      .catch(() => {
+        document.getElementById('visitor-count').textContent = 'خطأ';
+      });
 
+    updateAll();
+    setInterval(updateAll, 1000);
+  </script>
 </body>
 </html>
