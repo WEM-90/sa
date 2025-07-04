@@ -208,15 +208,14 @@
     function updateSection(targetDate, prefix) {
       const now = new Date();
       const diff = targetDate - now;
-      const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-      const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+      const totalHours = Math.floor(diff / (1000 * 60 * 60));
       const minutes = Math.floor((diff / (1000 * 60)) % 60);
       const seconds = Math.floor((diff / 1000) % 60);
       const dateStr = targetDate.getFullYear() + "-" + (targetDate.getMonth()+1).toString().padStart(2, '0') + "-" + targetDate.getDate().toString().padStart(2, '0');
       document.getElementById(prefix + "-date").textContent = dateStr;
       document.getElementById(prefix + "-day").textContent = weekdays[targetDate.getDay()];
       document.getElementById(prefix + "-remaining").textContent = `${days} يـوم`;
-      document.getElementById(prefix + "-countdown").textContent = `${hours}س ${minutes}د ${seconds}ث`;
+      document.getElementById(prefix + "-countdown").textContent = totalHours + " س " + minutes + " د " + seconds + " ث";
     }
 
     function updateAll() {
