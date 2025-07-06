@@ -221,7 +221,7 @@
   document.getElementById(prefix + "-day").textContent = targetDate.toLocaleDateString('ar-EG', { weekday: 'long' });
   document.getElementById(prefix + "-remaining").textContent = days + " يوم";
   document.getElementById(prefix + "-countdown").textContent =
-    totalHours + " ساعة " + minutes + " دقيقة " + seconds + " ثانية";
+    totalHours + " ساعة، " + minutes + " دقيقة، " + seconds + " ثانية،";
 }
     function updateAll() {
       const eligibility = getNextDate(27);
