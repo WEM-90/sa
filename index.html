@@ -16,13 +16,13 @@
       overflow-x: hidden;
     }
 
-.colon {
-  font-size: 1.8rem;
-  font-weight: bold;
-  color: #e5e5e5; /* أو أي لون يناسب التصميم */
-  padding: 0 6px;
-}
-    
+    .colon {
+      font-size: 1.8rem;
+      font-weight: bold;
+      color: #e5e5e5;
+      padding: 0 6px;
+    }
+
     .background-layer {
       position: fixed;
       top: 0;
@@ -72,26 +72,27 @@
     }
 
     th, td {
-  padding: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-}
+      padding: 6px;
+      border: 1px solid rgba(0, 0, 0, 0.2);
+    }
 
-th {
-  background-color: rgba(0, 0, 0, 0.15); /* خلفية خفيفة */
-  color: #e5e5e5; /* نصوص الرؤوس رمادي فاتح */
-}
+    th {
+      background-color: rgba(0, 0, 0, 0.15);
+      color: #e5e5e5; /* الرؤوس رمادي فاتح */
+    }
 
-td {
-  color: #ffffff; /* نصوص الصفوف الداخلية أبيض */
-}
+    td {
+      color: #ffffff; /* الصفوف الداخلية أبيض */
+    }
 
-tr {
-  background-color: rgba(0, 0, 0, 0.15); /* خلفية الصفوف خفيفة شفافة */
-}
+    tr {
+      background-color: rgba(0, 0, 0, 0.15);
+    }
+
     .visitor-counter {
       color: #e5e5e5;
       font-size: 0.8rem;
-        margin-top: -10px;
+      margin-top: -10px;
     }
 
     #visitor-count {
@@ -162,15 +163,16 @@ tr {
     </table>
 
     <div class="visitor-counter">
-  عدد الزائرين
-  <span class="colon">:</span>
-  <span id="visitor-count" class="small-number">0</span>
-</div>
+      عدد الزائرين
+      <span class="colon">:</span>
+      <span id="visitor-count" class="small-number">0</span>
+    </div>
 
     <a class="group-link" href="https://t.me/Wem_90">الدعــم الفنــي</a>
   </div>
 
   <script>
+    // عداد الزوار
     fetch('https://sa-3fxj.onrender.com/increment', { method: 'POST' })
       .then(() => {
         fetch('https://sa-3fxj.onrender.com/get-count')
@@ -183,8 +185,7 @@ tr {
         document.getElementById('visitor-count').textContent = 'خطأ في الاتصال';
       });
 
-    const weekdays = ["الأحــد", "الإثنيــن", "الثلاثــاء", "الأربعــاء", "الخميــس", "الجمعــة", "السبــت"];
-
+    // دوال العد التنازلي
     function getNextDate(day) {
       const now = new Date();
       let year = now.getFullYear();
@@ -203,35 +204,46 @@ tr {
 
     function adjustPaymentDate(date) {
       const wd = date.getDay();
-      if (wd === 5) { date.setDate(date.getDate() - 1); }
-      if (wd === 6) { date.setDate(date.getDate() + 1); }
+      if (wd === 5) { date.setDate(date.getDate() - 1); } // جمعة
+      if (wd === 6) { date.setDate(date.getDate() + 1); } // سبت
       return date;
     }
 
     function updateSection(targetDate, prefix) {
-  const now = new Date();
-  const diff = targetDate - now;
+      const now = new Date();
+      let diff = targetDate - now;
 
-  const days = Math.floor(diff / (1000 * 60 * 60 * 24));
-  const totalHours = Math.floor(diff / (1000 * 60 * 60));
-  const minutes = Math.floor((diff / (1000 * 60)) % 60);
-  const seconds = Math.floor((diff / 1000) % 60);
-  const dateStr = targetDate.getFullYear() + "-" +
-                  String(targetDate.getMonth() + 1).padStart(2, '0') + "-" +
-                  String(targetDate.getDate()).padStart(2, '0');
+      const dateStr = targetDate.getFullYear() + "-" +
+                      String(targetDate.getMonth() + 1).padStart(2, '0') + "-" +
+                      String(targetDate.getDate()).padStart(2, '0');
 
-  document.getElementById(prefix + "-date").textContent = dateStr;
-  document.getElementById(prefix + "-day").textContent = targetDate.toLocaleDateString('ar-EG', { weekday: 'long' });
-  document.getElementById(prefix + "-remaining").textContent = days + " يوم";
-  document.getElementById(prefix + "-countdown").textContent =
-    totalHours + " ساعة، " + minutes + " دقيقة، " + seconds + " ثانية،";
-}
+      document.getElementById(prefix + "-date").textContent = dateStr;
+      document.getElementById(prefix + "-day").textContent = targetDate.toLocaleDateString('ar-EG', { weekday: 'long' });
+
+      if (diff <= 0) {
+        // وصل اليوم
+        document.getElementById(prefix + "-remaining").textContent = "اليوم";
+        document.getElementById(prefix + "-countdown").textContent = "0 ساعة، 0 دقيقة، 0 ثانية";
+      } else {
+        const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+        const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+        const minutes = Math.floor((diff / (1000 * 60)) % 60);
+        const seconds = Math.floor((diff / 1000) % 60);
+
+        document.getElementById(prefix + "-remaining").textContent = days + " يوم";
+        document.getElementById(prefix + "-countdown").textContent =
+          hours + " ساعة، " + minutes + " دقيقة، " + seconds + " ثانية";
+      }
+    }
+
     function updateAll() {
       const eligibility = getNextDate(27);
       eligibility.setHours(0, 0, 0, 0);
+
       let payment = getNextDate(1);
       payment = adjustPaymentDate(payment);
       payment.setHours(0, 0, 0, 0);
+
       updateSection(eligibility, "eligibility");
       updateSection(payment, "payment");
     }
