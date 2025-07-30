@@ -186,18 +186,18 @@
       });
 
     // دوال العد التنازلي
-    function getNextDate(day) {
+    function getNextDate(day, fixedMonth = null) {
       const now = new Date();
       let year = now.getFullYear();
-      let month = now.getMonth();
+      let month = fixedMonth !== null ? fixedMonth : now.getMonth();
+
       let target = new Date(year, month, day);
       if (target <= now) {
-        month += 1;
-        if (month > 11) {
-          year += 1;
-          month = 0;
+        if (fixedMonth === null) {
+          month += 1;
+          if (month > 11) { year += 1; month = 0; }
+          target = new Date(year, month, day);
         }
-        target = new Date(year, month, day);
       }
       return target;
     }
@@ -221,7 +221,6 @@
       document.getElementById(prefix + "-day").textContent = targetDate.toLocaleDateString('ar-EG', { weekday: 'long' });
 
       if (diff <= 0) {
-        // وصل اليوم
         document.getElementById(prefix + "-remaining").textContent = "اليوم";
         document.getElementById(prefix + "-countdown").textContent = "0 ساعة، 0 دقيقة، 0 ثانية";
       } else {
@@ -240,7 +239,7 @@
       const eligibility = getNextDate(27);
       eligibility.setHours(0, 0, 0, 0);
 
-      let payment = getNextDate(1);
+      let payment = getNextDate(1, 8); // 8 = سبتمبر (الشهور تبدأ من 0)
       payment = adjustPaymentDate(payment);
       payment.setHours(0, 0, 0, 0);
 
