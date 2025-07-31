@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>الموقع مغلق</title>
+  <link href="https://fonts.googleapis.com/css2?family=Almarai&display=swap" rel="stylesheet">
+  <style>
+    html, body {
+      height: 100%;
+      margin: 0;
+      padding: 0;
+      font-family: 'Almarai', sans-serif;
+      color: #ff6666;
+      text-align: center;
+      overflow-x: hidden;
+    }
+
+    .background-layer {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: #000;
+      z-index: -2;
+    }
+
+    video {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;
+    }
+
+    .container {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .group-link {
+      color: #4dd0e1;
+      font-size: 0.9rem;
+      margin-top: 15px;
+      display: block;
+      text-decoration: none;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="background-layer"></div>
+
+  <video autoplay loop muted playsinline>
+    <source src="eid2.mp4" type="video/mp4">
+  </video>
+
+  <div class="container">
+    الموقع مغلق
+    <a class="group-link" href="https://t.me/Wem_90">الدعــم الفنــي</a>
+  </div>
+
+</body>
+</html>
